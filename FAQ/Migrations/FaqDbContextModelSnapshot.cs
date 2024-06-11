@@ -45,7 +45,7 @@ namespace FAQ.Migrations
                         });
                 });
 
-            modelBuilder.Entity("FAQ.Models.FAQ", b =>
+            modelBuilder.Entity("FAQ.Models.Question", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -61,7 +61,7 @@ namespace FAQ.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Question")
+                    b.Property<string>("QuestionText")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -75,7 +75,7 @@ namespace FAQ.Migrations
 
                     b.HasIndex("TopicId");
 
-                    b.ToTable("FAQs");
+                    b.ToTable("Questions");
 
                     b.HasData(
                         new
@@ -83,7 +83,7 @@ namespace FAQ.Migrations
                             Id = 1,
                             Answer = "Contoso University is a sample application that...",
                             CategoryId = "General",
-                            Question = "What is Contoso University?",
+                            QuestionText = "What is Contoso University?",
                             TopicId = "Getting Started"
                         });
                 });
@@ -112,16 +112,16 @@ namespace FAQ.Migrations
                         });
                 });
 
-            modelBuilder.Entity("FAQ.Models.FAQ", b =>
+            modelBuilder.Entity("FAQ.Models.Question", b =>
                 {
                     b.HasOne("FAQ.Models.Category", "Category")
-                        .WithMany("FAQs")
+                        .WithMany("Questions")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("FAQ.Models.Topic", "Topic")
-                        .WithMany("FAQs")
+                        .WithMany("Questions")
                         .HasForeignKey("TopicId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -133,12 +133,12 @@ namespace FAQ.Migrations
 
             modelBuilder.Entity("FAQ.Models.Category", b =>
                 {
-                    b.Navigation("FAQs");
+                    b.Navigation("Questions");
                 });
 
             modelBuilder.Entity("FAQ.Models.Topic", b =>
                 {
-                    b.Navigation("FAQs");
+                    b.Navigation("Questions");
                 });
 #pragma warning restore 612, 618
         }

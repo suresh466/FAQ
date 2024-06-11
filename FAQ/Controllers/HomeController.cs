@@ -1,32 +1,44 @@
-using FAQ.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
+using FAQ.Models;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace FAQ.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly FaqDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(FaqDbContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string topic = null, string category = null)
         {
-            return View();
-        }
+            var questions = _context.Questions
+                .Include(q => q.Topic)
+                .Include(q => q.Category)
+                .AsQueryable();
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+            if (!string.IsNullOrEmpty(topic))
+            {
+                questions = questions.Where(q => q.Topic.Name == topic);
+            }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            if (!string.IsNullOrEmpty(category))
+            {
+                questions = questions.Where(q => q.Category.Name == category);
+            }
+
+            var viewModel = new FaqViewModel
+            {
+                Questions = questions.ToList(),
+                Topics = _context.Topics.ToList(),
+                Categories = _context.Categories.ToList()
+            };
+
+            return View(viewModel);
         }
     }
 }

@@ -5,7 +5,7 @@
 namespace FAQ.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -33,27 +33,27 @@ namespace FAQ.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "FAQs",
+                name: "Questions",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Question = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    QuestionText = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Answer = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TopicId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     CategoryId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FAQs", x => x.Id);
+                    table.PrimaryKey("PK_Questions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_FAQs_Categories_CategoryId",
+                        name: "FK_Questions_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "Name",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_FAQs_Topics_TopicId",
+                        name: "FK_Questions_Topics_TopicId",
                         column: x => x.TopicId,
                         principalTable: "Topics",
                         principalColumn: "Name",
@@ -81,18 +81,18 @@ namespace FAQ.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "FAQs",
-                columns: new[] { "Id", "Answer", "CategoryId", "Question", "TopicId" },
+                table: "Questions",
+                columns: new[] { "Id", "Answer", "CategoryId", "QuestionText", "TopicId" },
                 values: new object[] { 1, "Contoso University is a sample application that...", "General", "What is Contoso University?", "Getting Started" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_FAQs_CategoryId",
-                table: "FAQs",
+                name: "IX_Questions_CategoryId",
+                table: "Questions",
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_FAQs_TopicId",
-                table: "FAQs",
+                name: "IX_Questions_TopicId",
+                table: "Questions",
                 column: "TopicId");
         }
 
@@ -100,7 +100,7 @@ namespace FAQ.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "FAQs");
+                name: "Questions");
 
             migrationBuilder.DropTable(
                 name: "Categories");
