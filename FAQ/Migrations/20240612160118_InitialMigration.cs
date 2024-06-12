@@ -2,6 +2,8 @@
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace FAQ.Migrations
 {
     /// <inheritdoc />
@@ -65,9 +67,9 @@ namespace FAQ.Migrations
                 column: "Name",
                 values: new object[]
                 {
-                    "Account",
                     "General",
-                    "Shipping"
+                    "History",
+                    "Maintenance"
                 });
 
             migrationBuilder.InsertData(
@@ -75,15 +77,26 @@ namespace FAQ.Migrations
                 column: "Name",
                 values: new object[]
                 {
-                    "Customer Service",
-                    "Getting Started",
-                    "Orders"
+                    "Chihuahua",
+                    "Pomeranian",
+                    "Retriever"
                 });
 
             migrationBuilder.InsertData(
                 table: "Questions",
                 columns: new[] { "Id", "Answer", "CategoryId", "QuestionText", "TopicId" },
-                values: new object[] { 1, "Contoso University is a sample application that...", "General", "What is Contoso University?", "Getting Started" });
+                values: new object[,]
+                {
+                    { 1, "They are very intelligent..", "General", "How intellegent are Retreivers?", "Retriever" },
+                    { 2, "Regular grooming and vet check-ups are essential...", "Maintenance", "How do I maintain my Retriever?", "Retriever" },
+                    { 3, "Retrievers were originally bred as hunting dogs...", "History", "What is the history of the Retriever breed?", "Retriever" },
+                    { 4, "Chihuahuas typically weigh between 2-6 pounds...", "General", "How big do Chihuahuas get?", "Chihuahua" },
+                    { 5, "Adult Chihuahuas should be fed 2-3 times a day...", "Maintenance", "How often should I feed my Chihuahua?", "Chihuahua" },
+                    { 6, "Chihuahuas are believed to have originated in Mexico...", "History", "What is the origin of the Chihuahua breed?", "Chihuahua" },
+                    { 7, "Pomeranians can be good with kids if socialized early...", "General", "Are Pomeranians good with kids?", "Pomeranian" },
+                    { 8, "Regular brushing and occasional baths are recommended...", "Maintenance", "How do I groom my Pomeranian?", "Pomeranian" },
+                    { 9, "Pomeranians are descended from large sled dogs...", "History", "What is the history of the Pomeranian breed?", "Pomeranian" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Questions_CategoryId",

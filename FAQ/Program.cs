@@ -23,8 +23,14 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "custom",
+        pattern: "{controller=Home}/{action=Index}/topic/{activeTopic}/category/{activeCategory}");
+    endpoints.MapDefaultControllerRoute();
+});
+
+
 
 app.Run();

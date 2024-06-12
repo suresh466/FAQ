@@ -8,9 +8,9 @@
     <!-- Bootstrap list for categories -->
     <div class="col-md-3 mt-5">
         <div class="list-group mt-2">
-            @foreach (var topic in Model.Topics)
+            @foreach (var category in Model.Categories)
             {
-                <a href="@Url.Action("Index", new { topic = topic.Name })" class="list-group-item">@topic.Name</a>
+                <a href="@Url.Action("Index", "Home", new { category = category.Name, topic = Model.ActiveTopic })" class="list-group-item">@category.Name</a>
             }
         </div>
     </div>
@@ -26,10 +26,10 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="@Url.Action("Index")">All FAQs</a>
                             </li>
-                            @foreach (var category in Model.Categories)
+                            @foreach (var topic in Model.Topics)
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link" href="@Url.Action("Index", new { category = category.Name })">@category.Name</a>
+                                    <a class="nav-link" href="@Url.Action("Index", "Home", new { topic = topic.Name, category = Model.ActiveCategory })">@topic.Name</a>
                                 </li>
                             }
                         </ul>

@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using FAQ.Models;
 
-namespace FAQ.Models
+public class FaqViewModel
 {
-    public class FaqViewModel
-    {
-        public IEnumerable<Question> Questions { get; set; }
-        public IEnumerable<Topic> Topics { get; set; }
-        public IEnumerable<Category> Categories { get; set; }
-    }
+    public List<Question> Questions { get; set; }
+    public List<Topic> Topics { get; set; }
+    public List<Category> Categories { get; set; }
+    public string ActiveTopic { get; set; } = "all";
+    public string ActiveCategory { get; set; } = "all";
 }

@@ -37,11 +37,11 @@ namespace FAQ.Migrations
                         },
                         new
                         {
-                            Name = "Account"
+                            Name = "Maintenance"
                         },
                         new
                         {
-                            Name = "Shipping"
+                            Name = "History"
                         });
                 });
 
@@ -81,10 +81,74 @@ namespace FAQ.Migrations
                         new
                         {
                             Id = 1,
-                            Answer = "Contoso University is a sample application that...",
+                            Answer = "They are very intelligent..",
                             CategoryId = "General",
-                            QuestionText = "What is Contoso University?",
-                            TopicId = "Getting Started"
+                            QuestionText = "How intellegent are Retreivers?",
+                            TopicId = "Retriever"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Answer = "Regular grooming and vet check-ups are essential...",
+                            CategoryId = "Maintenance",
+                            QuestionText = "How do I maintain my Retriever?",
+                            TopicId = "Retriever"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Answer = "Retrievers were originally bred as hunting dogs...",
+                            CategoryId = "History",
+                            QuestionText = "What is the history of the Retriever breed?",
+                            TopicId = "Retriever"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Answer = "Chihuahuas typically weigh between 2-6 pounds...",
+                            CategoryId = "General",
+                            QuestionText = "How big do Chihuahuas get?",
+                            TopicId = "Chihuahua"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Answer = "Adult Chihuahuas should be fed 2-3 times a day...",
+                            CategoryId = "Maintenance",
+                            QuestionText = "How often should I feed my Chihuahua?",
+                            TopicId = "Chihuahua"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Answer = "Chihuahuas are believed to have originated in Mexico...",
+                            CategoryId = "History",
+                            QuestionText = "What is the origin of the Chihuahua breed?",
+                            TopicId = "Chihuahua"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Answer = "Pomeranians can be good with kids if socialized early...",
+                            CategoryId = "General",
+                            QuestionText = "Are Pomeranians good with kids?",
+                            TopicId = "Pomeranian"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Answer = "Regular brushing and occasional baths are recommended...",
+                            CategoryId = "Maintenance",
+                            QuestionText = "How do I groom my Pomeranian?",
+                            TopicId = "Pomeranian"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Answer = "Pomeranians are descended from large sled dogs...",
+                            CategoryId = "History",
+                            QuestionText = "What is the history of the Pomeranian breed?",
+                            TopicId = "Pomeranian"
                         });
                 });
 
@@ -100,15 +164,15 @@ namespace FAQ.Migrations
                     b.HasData(
                         new
                         {
-                            Name = "Getting Started"
+                            Name = "Retriever"
                         },
                         new
                         {
-                            Name = "Orders"
+                            Name = "Chihuahua"
                         },
                         new
                         {
-                            Name = "Customer Service"
+                            Name = "Pomeranian"
                         });
                 });
 

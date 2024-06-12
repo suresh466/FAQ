@@ -7,38 +7,32 @@ namespace FAQ.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly FaqDbContext _context;
+        private FaqDbContext _context;
 
         public HomeController(FaqDbContext context)
         {
             _context = context;
         }
 
-        public IActionResult Index(string topic = null, string category = null)
+        public IActionResult Index(string topic = "all", string category = "all")
         {
-            var questions = _context.Questions
-                .Include(q => q.Topic)
-                .Include(q => q.Category)
-                .AsQueryable();
-
-            if (!string.IsNullOrEmpty(topic))
-            {
-                questions = questions.Where(q => q.Topic.Name == topic);
-            }
-
-            if (!string.IsNullOrEmpty(category))
-            {
-                questions = questions.Where(q => q.Category.Name == category);
-            }
-
             var viewModel = new FaqViewModel
             {
-                Questions = questions.ToList(),
+                ActiveTopic = topic,
+                ActiveCategory = category,
                 Topics = _context.Topics.ToList(),
                 Categories = _context.Categories.ToList()
             };
 
+            IQueryable<Question> query = _context.Questions;
+            if (topic != "all")
+                query = query.Where(q => q.Topic.Name.ToLower() == topic.ToLower());
+            if (category != "all")
+                query = query.Where(q => q.Category.Name.ToLower() == category.ToLower());
+            viewModel.Questions = query.ToList();
+
             return View(viewModel);
         }
     }
+
 }
