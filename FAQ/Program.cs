@@ -23,14 +23,15 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+// Here we're setting up how our app responds to different addresses.
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
         name: "custom",
         pattern: "{controller=Home}/{action=Index}/topic/{activeTopic}/category/{activeCategory}");
+
+    // This is our backup route. If the web address doesn't match any other maps, our app uses this one.
     endpoints.MapDefaultControllerRoute();
 });
-
-
 
 app.Run();

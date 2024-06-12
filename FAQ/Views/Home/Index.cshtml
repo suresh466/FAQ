@@ -8,6 +8,7 @@
     <!-- Bootstrap list for categories -->
     <div class="col-md-3 mt-5">
         <div class="list-group mt-2">
+            <!-- We're looping through each category and creating a link for it -->
             @foreach (var category in Model.Categories)
             {
                 <a href="@Url.Action("Index", "Home", new { category = category.Name, topic = Model.ActiveTopic })" class="list-group-item">@category.Name</a>
@@ -23,9 +24,11 @@
                 <nav class="navbar navbar-expand navbar-light">
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav">
+                            <!-- We're creating a link for all FAQs -->
                             <li class="nav-item">
                                 <a class="nav-link" href="@Url.Action("Index")">All FAQs</a>
                             </li>
+                            <!-- We're looping through each topic and creating a link for it just like categories -->
                             @foreach (var topic in Model.Topics)
                             {
                                 <li class="nav-item">
@@ -37,8 +40,9 @@
                 </nav>
             </div>
 
+            <!-- Questions are shown here in a card-->
             <div class="col-md-12">
-                <!-- Questions are shown here in a card-->
+                <!-- We're looping through each question and displaying it in a card -->
                 @foreach (var question in Model.Questions)
                 {
                     <div class="card mb-3">

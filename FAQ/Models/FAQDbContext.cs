@@ -9,17 +9,21 @@ namespace FAQ.Models
         {
         }
 
+        // These are the tables in our database
         public DbSet<Question> Questions { get; set; }
         public DbSet<Topic> Topics { get; set; }
         public DbSet<Category> Categories { get; set; }
 
+        // This method is used to configure the relationships between tables and to seed data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Each topic can have many questions
             modelBuilder.Entity<Topic>()
                 .HasMany(t => t.Questions)
                 .WithOne(q => q.Topic)
                 .HasForeignKey(q => q.TopicId);
 
+            // Each category can have many questions as well
             modelBuilder.Entity<Category>()
                 .HasMany(c => c.Questions)
                 .WithOne(q => q.Category)
